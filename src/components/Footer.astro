@@ -1,0 +1,47 @@
+---
+import { getCollection } from 'astro:content';
+
+import { cn } from '~/utils/cn';
+
+import type { LucideComponent } from '~/types/lucide';
+
+export interface Props {
+	class?: string;
+}
+
+const { class: className } = Astro.props;
+
+const socialLinks = await getCollection('socialLinks').then((arr) =>
+	// Sort the social links alphabetically by name
+	arr.sort((a, b) => a.data.name.localeCompare(b.data.name)),
+);
+---
+
+<footer class={cn("h-full mx-auto", className)}>
+	<div class="mx-auto max-w-7xl px-6 pb-16 md:flex md:items-center md:justify-between lg:px-8">
+		<div class="flex justify-center space-x-2 md:order-2">
+			{socialLinks.map(async ({ data: socialLink }) => {
+				const Icon = await import('lucide-astro').then((mod) => mod[socialLink.icon]) as LucideComponent;
+
+				return (
+					<a
+						aria-label={socialLink.name}
+						class={cn(
+							"text-gray-400 hover:text-gray-500 dark:hover:text-gray-100 text-sm bg-white hover:bg-gray-50 dark:bg-gray-950 dark:hover:bg-gray-900 border-2 border-white hover:border-gray-100 dark:border-gray-900 dark:hover:border-gray-800 rounded-md p-2 default-transition default-focus",
+							{ "inline-flex items-center justify-center gap-2 py-1": socialLink.showLabel === true }
+						)}
+						href={socialLink.url}
+						rel="noreferrer"
+						target="_blank"
+						title={socialLink.showLabel === false ? socialLink.name : undefined}
+					>
+						<Icon class="h-4 w-4" />
+						<span class={socialLink.showLabel === false ? "sr-only" : 'font-bold'}>{socialLink.name}</span>
+					</a>
+				)
+			})}
+		</div>
+		
+		<slot />
+	</div>
+</footer>
