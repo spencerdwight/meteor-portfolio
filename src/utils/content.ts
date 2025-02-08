@@ -52,7 +52,11 @@ export function sortPostsByPublishedAt(
 	a: CollectionEntry<'posts'>,
 	b: CollectionEntry<'posts'>,
 ) {
-	return b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf();
+	// ✅ Convert `publishedAt` to Date objects to ensure consistency
+	const dateA = new Date(a.data.publishedAt);
+	const dateB = new Date(b.data.publishedAt);
+
+	return dateB.valueOf() - dateA.valueOf();
 }
 
 /**
@@ -66,5 +70,7 @@ export function mapPostToListItem(post: CollectionEntry<'posts'>) {
 	return {
 		...post.data,
 		href: `/posts/${post.slug}`,
+		// ✅ Ensure `publishedAt` is always a valid Date string
+		publishedAt: new Date(post.data.publishedAt).toISOString(),
 	};
 }
