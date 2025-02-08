@@ -1,8 +1,7 @@
 import { readFileSync } from 'node:fs';
 import path from 'node:path';
 
-type Weight = 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900;
-
+type Weight = (typeof FONT_WEIGHTS)[number]; // ✅ Extracts valid weights dynamically
 type FontStyle = 'normal' | 'italic';
 
 interface FontOptions {
@@ -13,27 +12,35 @@ interface FontOptions {
 	lang?: string;
 }
 
-// Note: We have provided local TTF fonts here because WOFF2 fonts
-// are not supported by Vercel's OG Image API yet & the `@fontsource/inter`
-// package we use for the fonts actually loaded on the site does not
-// provide TTF fonts.
-const FONTS = [
-	{ weight: 100, path: './src/assets/fonts/Inter-Thin.ttf' },
-	{ weight: 200, path: './src/assets/fonts/Inter-ExtraLight.ttf' },
-	{ weight: 300, path: './src/assets/fonts/Inter-Light.ttf' },
-	{ weight: 400, path: './src/assets/fonts/Inter-Regular.ttf' },
-	{ weight: 500, path: './src/assets/fonts/Inter-Medium.ttf' },
-	{ weight: 600, path: './src/assets/fonts/Inter-SemiBold.ttf' },
-	{ weight: 700, path: './src/assets/fonts/Inter-Bold.ttf' },
-	{ weight: 800, path: './src/assets/fonts/Inter-ExtraBold.ttf' },
-	{ weight: 900, path: './src/assets/fonts/Inter-Black.ttf' },
-] as const;
+// ✅ Centralized weight values
+const FONT_WEIGHTS = [100, 200, 300, 400, 500, 600, 700, 800, 900] as const;
+
+// Local TTF fonts for OpenGraph image rendering
+const FONTS = FONT_WEIGHTS.map(weight => ({
+	weight,
+	path: `src/assets/fonts/Inter-${getFontName(weight)}.ttf`, // ✅ Dynamically resolves filenames
+}));
+
+function getFontName(weight: number): string {
+	const names: Record<number, string> = {
+		100: 'Thin',
+		200: 'ExtraLight',
+		300: 'Light',
+		400: 'Regular',
+		500: 'Medium',
+		600: 'SemiBold',
+		700: 'Bold',
+		800: 'ExtraBold',
+		900: 'Black',
+	};
+	return names[weight] || 'Regular'; // ✅ Fallback to 'Regular'
+}
 
 export const openGraphFonts = FONTS.map(
 	(font): FontOptions => ({
 		name: 'Inter',
-		data: readFileSync(path.resolve(process.cwd(), font.path)),
+		data: new Uint8Array(readFileSync(path.join(process.cwd(), font.path))).buffer, // ✅ Properly converts Buffer to ArrayBuffer
 		style: 'normal',
-		weight: font.weight,
+		weight: font.weight as Weight, // ✅ Ensures type compatibility
 	}),
 );
