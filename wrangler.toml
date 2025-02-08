@@ -1,15 +1,8 @@
+# Project name
 name = "meteor-portfolio"
-account_id = "04d74f6e364392205efaa8c9ac89dbe2"  # Replace with your actual Cloudflare account ID
 
-# ✅ Tell Cloudflare where to find the build output
+# ✅ Specify the output directory for Cloudflare Pages
 pages_build_output_dir = "dist"
 
-# ✅ Specify compatibility settings
+# ✅ Set compatibility date for Cloudflare
 compatibility_date = "2024-02-08"
-
-[build]
-command = "npm run build"
-
-[env.production]
-workers_dev = false
-routes = ["https://spencerdwight.me/*"]  # Replace with your actual domain
