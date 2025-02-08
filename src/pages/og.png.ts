@@ -8,14 +8,13 @@ export const prerender = true;
 
 export const GET: APIRoute = async (context) => {
 	try {
-		// ✅ Ensure fonts are loaded before generating response
+		// ✅ Ensure fonts are loaded correctly
 		const fonts = await openGraphFonts;
 
-		return new ImageResponse(OGHome({ context }), {
-			fonts,
-		});
+		// ✅ Remove `posts: sortedPosts` to prevent errors
+		return new ImageResponse(OGHome({ context }), { fonts });
 	} catch (error) {
-		console.error('Error generating OG image:', error);
+		console.error('❌ Error generating OG image:', error);
 		return new Response('Failed to generate OG image', { status: 500 });
 	}
 };
