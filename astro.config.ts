@@ -6,10 +6,6 @@ import tailwind from '@astrojs/tailwind';
 import vercel from '@astrojs/vercel';
 import robotsTxt from 'astro-robots-txt';
 
-// ✅ Fix for vite-plugin-base64 import
-// @ts-ignore (Ignore TypeScript warning if types are missing)
-import base64Plugin from 'vite-plugin-base64';
-
 // ✅ Correct import for rehype and remark plugins
 import rehypePrettyCode from 'rehype-pretty-code';
 import remarkGfm from 'remark-gfm';
@@ -46,6 +42,6 @@ export default defineConfig({
   },
 
   vite: {
-    plugins: [base64Plugin()], // ✅ Ensure base64 plugin is used correctly
+    plugins: [], // ✅ Ensure no base64 plugin is included
   },
 });

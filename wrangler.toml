@@ -1,0 +1,20 @@
+name = "meteor-portfolio"
+type = "javascript"
+
+account_id = "04d74f6e364392205efaa8c9ac89dbe2" # Replace with your Cloudflare account ID
+workers_dev = true
+compatibility_date = "2024-02-08"
+
+# ✅ Correcting the output directory for Astro
+[site]
+bucket = "./dist"  # Astro builds into `dist` by default, ensure this is correct
+entry-point = "."
+
+# ✅ Ensuring Cloudflare runs the correct build command
+[build]
+command = "npm run build"
+
+# ✅ Correcting the production environment settings
+[env.production]
+workers_dev = false
+routes = ["https://spencerdwight.me/*"] # Replace with your actual domain
