@@ -46,8 +46,18 @@ const socialLinks = defineCollection({
 		.strict(),
 });
 
+const buildingCollection = defineCollection({
+	schema: z.object({
+	  title: z.string(),
+	  description: z.string(),
+	  date: z.string(), // Use `z.date()` if this is always a valid date
+	}),
+  });
+  
+
 export const collections = {
 	events,
 	posts,
 	socialLinks,
+	building: buildingCollection, // ✅ This must be fully defined here
 };

@@ -40,7 +40,15 @@ adapter: cloudflare(),
 		// Note: We disable syntax highlighting here because we're using `rehype-pretty-code` instead
 		syntaxHighlight: false,
 	},
-	output: 'static',
+	output: 'server',
+ 
+	// ✅ Add Image Service Here – we adjusted this which may relate to build-time image processing, and our sharp warning
+ image: {
+    service: {
+      entrypoint: "astro/assets/services/compile",
+    },
+  },
+
 	site: getSite(),
 	vite: {
 		plugins: [base64 as unknown as any],
