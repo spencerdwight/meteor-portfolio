@@ -1,6 +1,6 @@
 {
 	"$schema": "../../../.astro/collections/socialLinks.schema.json",
-	"icon": "Twitter",
-	"name": "Twitter",
-	"url": "https://twitter.com/intent/follow?screen_name=nurodev&twgr=nurodev&twterm=follow"
+	"icon": "Star",
+	"name": "Are.na",
+	"url": "https://www.are.na/spencer-dwight/channels"
 }

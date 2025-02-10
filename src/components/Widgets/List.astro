@@ -8,7 +8,7 @@ import type { CollectionEntry } from 'astro:content';
 
 type Item = CollectionEntry<'posts'>['data'] & {
   href: string;
-  icon: string; // ✅ Ensure 'icon' is a string type
+  icon?: string; // ✅ Made optional to prevent errors
 };
 
 export interface Props {
@@ -44,12 +44,12 @@ const anchorProps = hasUrl ? { href } : {};
   {items.length > 0 ? (
     <ul class="flex flex-col space-y-2 dark:space-y-0 divide-y-2 divide-gray-100 dark:divide-y-0 mt-3" role="list">
       {items.map((item, index) => {
-        // ✅ Fix: Ensure item.icon exists and is a valid key
-        const iconName = item.icon as keyof typeof Icons;
-        const Icon = Icons[iconName] || Icons.HelpCircle;
+        // ✅ Fix: Ensure item.icon is defined and valid
+        const iconName = (item.icon && item.icon in Icons) ? (item.icon as keyof typeof Icons) : 'HelpCircle';
+        const Icon = Icons[iconName] || Icons.HelpCircle; // ✅ Always provide a fallback icon
 
-        // ✅ Fix Date handling (ensure it is always a Date object)
-        const publishedDate = item.publishedAt instanceof Date ? item.publishedAt : new Date(item.publishedAt);
+        // ✅ Fix: Ensure publishedDate is a Date object
+        const publishedDate = new Date(item.publishedAt);
 
         return (
           <li>
@@ -67,7 +67,7 @@ const anchorProps = hasUrl ? { href } : {};
 
               <time
                 class="font-normal text-sm"
-                datetime={publishedDate.toISOString()} // ✅ Convert safely to ISO
+                datetime={publishedDate.toISOString()} // ✅ Safe conversion to ISO
                 title={format(publishedDate, 'PPP')}
               >
                 {format(publishedDate, 'dd-MM-yyyy')}

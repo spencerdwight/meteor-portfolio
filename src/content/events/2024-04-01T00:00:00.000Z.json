@@ -1,7 +1,7 @@
 {
 	"$schema": "../../../.astro/collections/events.schema.json",
-	"date": "2024-04-01T00:00:00.000Z",
-	"title": "Built an electric car",
-	"icon": "Car",
-	"url": "https://tesla.com"
+	"date": "2025-05-21T00:00:00.000Z",
+	"title": "Lightning in a Bottle",
+	"icon": "Lightbulb",
+	"url": "https://www.libfestival.org/"
 }

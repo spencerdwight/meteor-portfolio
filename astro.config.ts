@@ -1,47 +1,48 @@
-import { defineConfig } from 'astro/config';
 import mdx from '@astrojs/mdx';
 import preact from '@astrojs/preact';
 import sitemap from '@astrojs/sitemap';
 import tailwind from '@astrojs/tailwind';
-import vercel from '@astrojs/vercel';
+import cloudflare from '@astrojs/cloudflare';
 import robotsTxt from 'astro-robots-txt';
+import { defineConfig } from 'astro/config';
+import { base64 } from 'vite-plugin-base64';
 
-// ✅ Correct import for rehype and remark plugins
-import rehypePrettyCode from 'rehype-pretty-code';
-import remarkGfm from 'remark-gfm';
+// biome-ignore lint/nursery/useImportRestrictions: Astro cannot read the local `tsconfig.json` to resolve import path aliases
+import { rehypePlugins, remarkPlugins } from './src/utils/markdown';
 
-// ✅ Function to determine the correct site URL
-const getSite = (): string =>
-  import.meta.env.DEV
-    ? 'http://localhost:4321'
-    : process.env.VERCEL_URL
-    ? `https://${process.env.VERCEL_URL}`
-    : 'https://example.com';
+function getSite(): string {
+	if (import.meta.env.DEV) return 'http://localhost:4321';
+	if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`;
+	return 'https://example.com';
+}
 
-// ✅ Export Astro config
+// https://astro.build/config
 export default defineConfig({
-  site: getSite(),
-  output: 'server', // Ensure compatibility with deployment
+adapter: cloudflare(),
 
-  adapter: vercel(), // Vercel adapter
+	experimental: {
 
-  integrations: [
-    mdx(),
-    preact(),
-    tailwind({ applyBaseStyles: false }),
-    sitemap(),
-    robotsTxt({
-      sitemap: new URL('/sitemap-index.xml', getSite()).href,
-    }),
-  ],
-
-  markdown: {
-    rehypePlugins: [rehypePrettyCode], // ✅ Ensure correct handling of rehype plugins
-    remarkPlugins: [remarkGfm], // ✅ Ensure correct handling of remark plugins
-    syntaxHighlight: false, // ✅ Using rehype-pretty-code instead
-  },
-
-  vite: {
-    plugins: [], // ✅ Ensure no base64 plugin is included
-  },
+	},
+	integrations: [
+		mdx(),
+		preact(),
+		robotsTxt({
+			sitemap: new URL('/sitemap-index.xml', getSite()).href,
+		}),
+		sitemap(),
+		tailwind({
+			applyBaseStyles: false,
+		}),
+	],
+	markdown: {
+		rehypePlugins,
+		remarkPlugins,
+		// Note: We disable syntax highlighting here because we're using `rehype-pretty-code` instead
+		syntaxHighlight: false,
+	},
+	output: 'static',
+	site: getSite(),
+	vite: {
+		plugins: [base64 as unknown as any],
+	},
 });

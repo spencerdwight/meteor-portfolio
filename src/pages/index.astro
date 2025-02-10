@@ -9,26 +9,17 @@ import Timeline from '~/components/Widgets/Timeline.astro';
 import Document from '~/layouts/Document.astro';
 import { filterPosts, mapPostToListItem, sortPostsByPublishedAt } from '~/utils/content';
 
-const [posts, events, buildingProjects] = await Promise.all([
+const [posts, events] = await Promise.all([
 	getCollection('posts').then((posts) =>
 		posts
 			.filter(filterPosts({ archived: false }))
-			.sort((a, b) => new Date(b.data.publishedAt).valueOf() - new Date(a.data.publishedAt).valueOf()) // ✅ Fix date sorting
+			.sort(sortPostsByPublishedAt)
 			.map(mapPostToListItem),
 	),
 	getCollection('events').then((events) =>
 		events
-			.sort((a, b) => new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf()) // ✅ Fix event date sorting
-			.map(({ data }) => ({
-				...data,
-				date: new Date(data.date).toISOString(), // ✅ Convert date safely to string format
-			})),
-	),
-	getCollection('building').then((projects) =>
-		projects.map((project) => ({
-			...mapPostToListItem(project),
-			publishedAt: new Date(project.data.publishedAt).toISOString(), // ✅ Ensure safe date conversion
-		})),
+			.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+			.map(({ data }) => data),
 	),
 ]);
 ---
@@ -53,21 +44,12 @@ const [posts, events, buildingProjects] = await Promise.all([
 				events={events}
 				title="Events"
 			/>
-			<List
-				class="md:col-span-6 max-h-80 min-h-48 md:min-h-80"
-				id="building"
-				items={buildingProjects}
-				title="Building"
-				href="/building"
-			/>
 		</div>
 	</main>
 
 	<Footer class="max-w-4xl">
 		<div class="mt-8 md:order-1 md:mt-0">
-			<p class="text-center text-xs leading-5 text-gray-400 font-medium">
-				&copy; {new Date().getFullYear()}
-			</p>
+			<p class="text-center text-xs leading-5 text-gray-400 font-medium">&copy; {new Date().getFullYear()}</p>
 		</div>
 	</Footer>
 </Document>

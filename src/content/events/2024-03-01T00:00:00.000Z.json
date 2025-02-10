@@ -1,7 +1,7 @@
 {
 	"$schema": "../../../.astro/collections/events.schema.json",
-	"date": "2024-03-01T00:00:00.000Z",
+	"date": "2025-08-16T00:00:00.000Z",
 	"icon": "Rocket",
-	"title": "Launched a rocket",
-	"url": "https://spacex.com"
+	"title": "Bass Canyon",
+	"url": "https://www.basscanyon.com/"
 }
