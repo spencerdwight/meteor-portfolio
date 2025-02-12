@@ -29,6 +29,8 @@ const FONTS = [
 	{ weight: 900, path: './src/assets/fonts/Inter-Black.ttf' },
 ] as const;
 
+// Note: I adjusted the data here to push buffer to ArrayBuffer, which was recommended as optimized
+
 export const openGraphFonts = FONTS.map(
 	(font): FontOptions => ({
 		name: 'Inter',

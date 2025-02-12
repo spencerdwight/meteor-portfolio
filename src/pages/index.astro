@@ -9,7 +9,7 @@ import Timeline from '~/components/Widgets/Timeline.astro';
 import Document from '~/layouts/Document.astro';
 import { filterPosts, mapPostToListItem, sortPostsByPublishedAt } from '~/utils/content';
 
-const [posts, events] = await Promise.all([
+const [posts, events, building] = await Promise.all([
 	getCollection('posts').then((posts) =>
 		posts
 			.filter(filterPosts({ archived: false }))
@@ -18,9 +18,14 @@ const [posts, events] = await Promise.all([
 	),
 	getCollection('events').then((events) =>
 		events
-			.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+			.sort((a, b) => a.data.date.valueOf() - b.data.date.valueOf())
 			.map(({ data }) => data),
 	),
+	getCollection('building').then((building) =>
+		building
+    		.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+			.map(({ data }) => data), // ✅ Extract data
+  ),
 ]);
 ---
 
@@ -43,6 +48,13 @@ const [posts, events] = await Promise.all([
 				id="events"
 				events={events}
 				title="Events"
+			/>
+			<List
+				class="md:col-span-6 max-h-80 min-h-48 md:min-h-80"
+				id="building"
+				items={building}
+				title="Building"
+				href="/building"
 			/>
 		</div>
 	</main>

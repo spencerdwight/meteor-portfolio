@@ -1,4 +1,5 @@
 import { defineCollection, z } from 'astro:content';
+import type { date } from 'astro:schema';
 // biome-ignore lint/style/noNamespaceImport: This only affects SSG so this is fine to use here.
 import * as Icons from 'lucide-astro';
 
@@ -47,13 +48,16 @@ const socialLinks = defineCollection({
 });
 
 const buildingCollection = defineCollection({
+	type: 'content', // ✅ Ensures Markdown support
 	schema: z.object({
-	  title: z.string(),
-	  description: z.string(),
-	  date: z.string(), // Use `z.date()` if this is always a valid date
+		title: z.string(),
+		description: z.string(),
+		icon: z.enum(IconKeys).default('Newspaper'),
+		lastModifiedAt: z.coerce.date().optional(),
+		publishedAt: z.coerce.date(),
 	}),
-  });
-  
+});
+
 
 export const collections = {
 	events,
