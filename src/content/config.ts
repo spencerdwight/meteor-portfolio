@@ -53,8 +53,9 @@ const buildingCollection = defineCollection({
 		title: z.string(),
 		description: z.string(),
 		icon: z.enum(IconKeys).default('Newspaper'),
-		lastModifiedAt: z.coerce.date().optional(),
 		publishedAt: z.coerce.date(),
+		lastModifiedAt: z.coerce.date().optional(),
+		
 	}),
 });
 
