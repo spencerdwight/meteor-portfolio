@@ -31,7 +31,7 @@ export const GET: APIRoute = async (context) => {
 		description: SITE_DESCRIPTION,
 		site: context.site as URL,
 		items: posts
-			.sort((b, a) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf())
+			.sort((a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf())
 			.map((post): RSSFeedItem => {
 				const lastModifiedAt = lastModifiedAtMap.get(post.slug);
 

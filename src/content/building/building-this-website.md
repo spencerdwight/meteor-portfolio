@@ -34,9 +34,9 @@ To stage all modified files, run:
 
     git add .
 
-If you only want to add specific files, use:
+    If you only want to add specific files, use:
 
-    git add filename.ext
+        git add filename.ext
 
 
 3 Commit Your Changes

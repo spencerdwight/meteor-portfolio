@@ -1,8 +1,22 @@
-# Project name
-name = "meteor-portfolio"
+name = "your-site-name"  # Replace with your actual site name
+type = "javascript"  # Specifies Cloudflare Workers as the runtime
+account_id = "04d74f6e364392205efaa8c9ac89dbe2"
+workers_dev = true  # Set to true for testing, change for production
+compatibility_date = "2024-02-07"  # Use the latest Cloudflare Workers compatibility date
 
-# ✅ Specify the output directory for Cloudflare Pages
-pages_build_output_dir = "dist"
+# The entry point for Astro SSR
+main = "./.output/server/entry.mjs"
 
-# ✅ Set compatibility date for Cloudflare
-compatibility_date = "2024-02-08"
+# Environment Variables (Optional, add if you need API keys)
+[vars]
+MY_ENV_VAR = "some_value"
+
+# KV, D1, R2, Queues, or other Cloudflare Services (Optional)
+# [[kv_namespaces]]
+# binding = "MY_KV_NAMESPACE"
+# id = "your-kv-namespace-id"
+
+# Custom Routes (Optional)
+# [[routes]]
+# pattern = "your-site.com/*"
+# zone_id = "your-zone-id"

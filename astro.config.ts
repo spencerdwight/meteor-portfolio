@@ -51,6 +51,6 @@ adapter: cloudflare(),
 
 	site: getSite(),
 	vite: {
-		plugins: [base64 as unknown as any],
+		plugins: [base64 as any],
 	},
 });

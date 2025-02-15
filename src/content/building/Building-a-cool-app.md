@@ -10,5 +10,3 @@ draft: false
 
 This is a sample markdown file to test the **building** section in the site.
 
-
-git commit -m "Updated dates and fixed building section and markdown issues"
