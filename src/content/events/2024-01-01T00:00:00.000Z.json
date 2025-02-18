@@ -2,5 +2,6 @@
 	"$schema": "../../../.astro/collections/events.schema.json",
 	"date": "2025-07-26T00:00:00.000Z",
 	"icon": "Sparkles",
-	"title": "Shambhala Music Festival"
+	"title": "Shambhala Music Festival",
+	"url": "https://www.shambhalamusicfestival.com/"
 }

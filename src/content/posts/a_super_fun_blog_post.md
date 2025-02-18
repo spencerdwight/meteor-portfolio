@@ -1,7 +1,7 @@
 ---
-title: "a super fun blog post"
+title: "A SUPER fun blog post"
 description: "The greatest post ever written, so far."
-icon: "Cake"
+icon: "Pencil"
 publishedAt: 2024-02-10 # Change to the correct date (YYYY-MM-DD)
 draft: false # Set to true if you're not ready to publish
 ---

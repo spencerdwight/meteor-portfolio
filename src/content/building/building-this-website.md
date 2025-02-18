@@ -1,7 +1,7 @@
 ---
-title: "Building this Website"
+title: "Building this Website – Meteor"
 description: "Learning to Code from a ButteryTheme Meteor"
-icon: "Webcam"
+icon: "Hammer"
 publishedAt: 2024-02-12
 draft: false
 ---
