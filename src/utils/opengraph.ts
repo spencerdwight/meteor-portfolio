@@ -39,3 +39,7 @@ export const openGraphFonts = FONTS.map(
 		weight: font.weight,
 	}),
 );
+
+const avatarBuffer = readFileSync(path.resolve(process.cwd(), './src/assets/avatar.jpeg'));
+
+export const avatarDataUri = `data:image/jpeg;base64,${avatarBuffer.toString('base64')}`;

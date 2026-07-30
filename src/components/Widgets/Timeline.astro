@@ -1,5 +1,6 @@
 ---
 import { format } from 'date-fns';
+import * as Icons from 'lucide-astro';
 import { FlagTriangleRight } from 'lucide-astro';
 
 import { cn } from '~/utils/cn';
@@ -7,6 +8,8 @@ import { cn } from '~/utils/cn';
 import type { CollectionEntry } from 'astro:content';
 
 import type { LucideComponent } from '~/types/lucide';
+
+const iconMap = Icons as unknown as Record<string, LucideComponent>;
 
 type Event = CollectionEntry<'events'>;
 
@@ -28,7 +31,7 @@ const { class: className, events, id, title } = Astro.props;
 	{events.length > 0 ? (
 		<ul class="flow-root mt-6" role="list">
 			{events.map(async (event, index) => {
-				const Icon = await import('lucide-astro').then((res) => res[event.icon]) as LucideComponent;
+				const Icon = iconMap[event.icon]!;
 
 				const hasUrl = !!event.url;
 				const Component = hasUrl ? 'a' : 'div';

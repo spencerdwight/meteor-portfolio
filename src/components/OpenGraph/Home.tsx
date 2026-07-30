@@ -1,5 +1,5 @@
-import avatarBase64 from '~/assets/avatar.jpeg?base64';
 import { SITE_DESCRIPTION, SITE_TITLE } from '~/constants';
+import { avatarDataUri } from '~/utils/opengraph';
 
 import type { APIContext } from 'astro';
 
@@ -14,7 +14,7 @@ export function OGHome(_props: OGHomeProps) {
 				<div tw='m-8 flex w-full grow flex-col justify-end rounded-xl p-4 pr-8'>
 					<img
 						alt='Avatar of the author of the post'
-						src={avatarBase64}
+						src={avatarDataUri}
 						tw='mb-8 h-48 w-48 rounded-full'
 					/>
 

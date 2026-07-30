@@ -1,5 +1,4 @@
 import { defineCollection, z } from 'astro:content';
-import type { date } from 'astro:schema';
 // biome-ignore lint/style/noNamespaceImport: This only affects SSG so this is fine to use here.
 import * as Icons from 'lucide-astro';
 

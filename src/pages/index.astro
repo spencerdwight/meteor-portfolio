@@ -23,10 +23,9 @@ const [posts, events, building] = await Promise.all([
 	),
 	getCollection('building').then((building) =>
 		building
-			.filter(filterPosts({ archived: false }))
-    		.sort(sortPostsByPublishedAt)
-			.map(({ data }) => data), // ✅ Extract data
-  ),
+			.sort((a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf())
+			.map(({ data }) => data),
+	),
 ]);
 ---
 

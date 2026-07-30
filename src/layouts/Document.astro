@@ -1,5 +1,5 @@
 ---
-import { ViewTransitions } from 'astro:transitions';
+import { ClientRouter } from 'astro:transitions';
 
 import '@fontsource/inter';
 
@@ -12,7 +12,7 @@ import '~/styles/global.css';
 <html class='scroll-smooth antialiased selection:bg-primary-500 selection:text-white' lang='en'>
 	<head>
 		<slot name='head' />
-		<ViewTransitions />
+		<ClientRouter />
 	</head>
 
 	<body class='bg-white font-sans text-gray-800 dark:bg-gray-950 dark:text-gray-100'>

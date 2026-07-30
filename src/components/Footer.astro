@@ -3,7 +3,11 @@ import { getCollection } from 'astro:content';
 
 import { cn } from '~/utils/cn';
 
+import * as Icons from 'lucide-astro';
+
 import type { LucideComponent } from '~/types/lucide';
+
+const iconMap = Icons as unknown as Record<string, LucideComponent>;
 
 export interface Props {
 	class?: string;
@@ -21,7 +25,7 @@ const socialLinks = await getCollection('socialLinks').then((arr) =>
 	<div class="mx-auto max-w-7xl px-6 pb-16 md:flex md:items-center md:justify-between lg:px-8">
 		<div class="flex justify-center space-x-2 md:order-2">
 			{socialLinks.map(async ({ data: socialLink }) => {
-				const Icon = await import('lucide-astro').then((mod) => mod[socialLink.icon]) as LucideComponent;
+				const Icon = iconMap[socialLink.icon]!;
 
 				return (
 					<a

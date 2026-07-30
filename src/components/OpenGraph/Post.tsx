@@ -1,6 +1,5 @@
-import avatarBase64 from '~/assets/avatar.jpeg?base64';
-
 import type { CollectionEntry } from 'astro:content';
+import { avatarDataUri } from '~/utils/opengraph';
 import type { APIContext } from 'astro';
 
 interface OGPostProps {
@@ -21,7 +20,7 @@ export function OGPost({ post }: OGPostProps) {
 
 					<img
 						alt='Avatar of the author of the post'
-						src={avatarBase64}
+						src={avatarDataUri}
 						tw='h-24 w-24 rounded-full'
 					/>
 				</div>

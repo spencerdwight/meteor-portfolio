@@ -35,6 +35,10 @@ type Post = CollectionEntry<'posts'>;
 export const GET: APIRoute<Post, Pick<Post, 'slug'>> = async (context) => {
 	const post = await getEntry('posts', context.params.slug);
 
+	if (!post) {
+		return new Response(null, { status: 404 });
+	}
+
 	return new ImageResponse(OGPost({ context, post }), {
 		fonts: openGraphFonts,
 	});

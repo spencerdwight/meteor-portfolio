@@ -1,15 +1,19 @@
 ---
 import { format } from 'date-fns';
+import * as Icons from 'lucide-astro';
 import { Newspaper } from 'lucide-astro';
 
 import { cn } from '~/utils/cn';
 
-import type { CollectionEntry } from 'astro:content';
-
 import type { LucideComponent } from '~/types/lucide';
 
-type Item = CollectionEntry<'posts'>['data'] & {
-	href: string;
+const iconMap = Icons as unknown as Record<string, LucideComponent>;
+
+type Item = {
+	title: string;
+	icon: string;
+	publishedAt: Date;
+	href?: string;
 };
 
 export interface Props {
@@ -48,7 +52,7 @@ const anchorProps = hasUrl ? { href } : {};
 			role="list"
 		>
 			{items.map(async (item, index) => {
-				const Icon = await import('lucide-astro').then((res) => res[item.icon]) as LucideComponent;
+				const Icon = iconMap[item.icon]!;
 
 				const hasUrl = !!item.href;
 				const Component = hasUrl ? 'a' : 'div';

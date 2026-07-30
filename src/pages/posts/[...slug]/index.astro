@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import { format } from 'date-fns';
+import * as Icons from 'lucide-astro';
 import { ArrowLeft } from 'lucide-astro';
 
 import Avatar from '~/components/Avatar.astro';
@@ -16,6 +17,10 @@ import '~/styles/markdown.css';
 import type { CollectionEntry } from 'astro:content';
 
 import type { LucideComponent } from '~/types/lucide';
+
+export const prerender = true;
+
+const iconMap = Icons as unknown as Record<string, LucideComponent>;
 
 export async function getStaticPaths() {
 	const posts = await getCollection('posts', filterPosts({ archived: true }));
@@ -37,9 +42,7 @@ export type Props = CollectionEntry<'posts'>;
 const { render: renderPost, data: post, slug } = Astro.props;
 const { Content } = await renderPost();
 
-const Icon = (await import('lucide-astro').then(
-	(res) => res[post.icon],
-)) as LucideComponent;
+const Icon = iconMap[post.icon]!;
 ---
 
 <Head
