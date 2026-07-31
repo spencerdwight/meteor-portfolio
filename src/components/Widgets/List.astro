@@ -54,14 +54,28 @@ const anchorProps = hasUrl ? { href } : {};
 			{items.map(async (item, index) => {
 				const Icon = iconMap[item.icon]!;
 
-				const hasUrl = !!item.href;
+				const href = item.href;
+				const hasUrl = typeof href === 'string';
+				const isExternal = hasUrl && /^https?:\/\//.test(href);
 				const Component = hasUrl ? 'a' : 'div';
+
+				const anchorProps = hasUrl
+	? {
+			href,
+			...(isExternal
+				? {
+						target: '_blank',
+						rel: 'noopener noreferrer',
+					}
+				: {}),
+		}
+	: {};
 				
 				return (
 					<li>
 						<Component
-							href={item.href}
-								class={cn(
+							{...anchorProps}
+							class={cn(
 								"text-gray-400 hover:text-gray-500 dark:text-gray-300 dark:hover:text-gray-200 bg-white hover:bg-gray-50 dark:bg-gray-950 dark:hover:bg-gray-900 border-2 border-white hover:border-gray-100 dark:border-gray-900 dark:hover:border-gray-800 flex items-center justify-between space-x-4 p-2.5 rounded-md default-transition default-focus",
 								{ 'mt-2': index + 1 !== 0 }
 							)}
