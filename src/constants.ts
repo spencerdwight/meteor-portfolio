@@ -1,11 +1,11 @@
 // Place any global data in this file.
 // You can import this data from anywhere in your site by using the `import` keyword.
 
-export const SITE_TITLE = 'Spencer Dwight';
+export const SITE_TITLE = 'Sprites – Electronic Music';
 export const SITE_DESCRIPTION =
-	'Multidimensional Designer';
+	'Electronic Music';
 
 export const HOME = {
-	title: 'Spencer Dwight',
-	subtitle: SITE_DESCRIPTION,
+	title: 'Sprites',
+	subtitle: '_ Electronic music producer *',
 };

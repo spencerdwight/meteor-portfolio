@@ -47,14 +47,14 @@ const socialLinks = defineCollection({
 });
 
 const buildingCollection = defineCollection({
-	type: 'content', // ✅ Ensures Markdown support
+	type: 'content',
 	schema: z.object({
 		title: z.string(),
 		description: z.string(),
 		icon: z.enum(IconKeys).default('Newspaper'),
 		publishedAt: z.coerce.date(),
 		lastModifiedAt: z.coerce.date().optional(),
-		
+		url: z.string().url().optional(),
 	}),
 });
 
@@ -63,5 +63,5 @@ export const collections = {
 	events,
 	posts,
 	socialLinks,
-	building: buildingCollection, // ✅ This must be fully defined here
+	building: buildingCollection,
 };

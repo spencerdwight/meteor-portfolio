@@ -1,5 +1,5 @@
 ---
-import { format } from 'date-fns';
+import { formatLongDate, formatShortDate } from '~/utils/date';
 import * as Icons from 'lucide-astro';
 import { Newspaper } from 'lucide-astro';
 
@@ -74,9 +74,9 @@ const anchorProps = hasUrl ? { href } : {};
 							<time
 								class="font-normal text-sm"
 								datetime={item.publishedAt.toISOString()}
-								title={format(item.publishedAt, 'PPP')}
+								title={formatLongDate(item.publishedAt)}
 							>
-								{format(item.publishedAt, 'MM-dd-yyyy')}
+								{formatShortDate(item.publishedAt)}
 							</time>
 						</Component>
 					</li>

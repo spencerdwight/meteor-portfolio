@@ -1,6 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
-import { format } from 'date-fns';
+import { formatLongDate, formatShortDate } from '~/utils/date';
 import * as Icons from 'lucide-astro';
 import { ArrowLeft } from 'lucide-astro';
 
@@ -65,9 +65,9 @@ const Icon = iconMap[post.icon]!;
 					<time
 						class='font-normal text-base text-gray-400 dark:text-gray-300'
 						datetime={post.publishedAt.toISOString()}
-						title={format(post.publishedAt, 'PPP')}
+						title={formatLongDate(post.publishedAt)}
 					>
-						{format(post.publishedAt, 'dd-MM-yyyy')}
+						{formatShortDate(post.publishedAt)}
 					</time>
 					
 					<hr class="border-2 border-gray-100 dark:border-gray-900 rounded-full grow" />

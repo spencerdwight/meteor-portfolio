@@ -1,5 +1,5 @@
 ---
-import { format } from 'date-fns';
+import { formatLongDate, formatShortDate } from '~/utils/date';
 import * as Icons from 'lucide-astro';
 import { FlagTriangleRight } from 'lucide-astro';
 
@@ -77,9 +77,9 @@ const { class: className, events, id, title } = Astro.props;
 									<time
 										class="font-normal"
 										datetime={event.date.toISOString()}
-										title={format(event.date, 'PPP')}
+										title={formatLongDate(event.date)}
 									>
-										{format(event.date, 'MM-dd-yyyy')}
+										{formatShortDate(event.date)}
 									</time>
 								</div>
 							</div>

@@ -24,7 +24,12 @@ const [posts, events, building] = await Promise.all([
 	getCollection('building').then((building) =>
 		building
 			.sort((a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf())
-			.map(({ data }) => data),
+			.map(({ data }) => ({
+				title: data.title,
+				icon: data.icon,
+				publishedAt: data.publishedAt,
+				...(data.url !== undefined ? { href: data.url } : {}),
+			})),
 	),
 ]);
 ---
@@ -54,7 +59,6 @@ const [posts, events, building] = await Promise.all([
 				id="building"
 				items={building}
 				title="Building"
-				href="/building"
 			/>
 		</div>
 	</main>
