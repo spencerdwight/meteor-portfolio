@@ -13,33 +13,85 @@ interface FontOptions {
 	lang?: string;
 }
 
-// Note: We have provided local TTF fonts here because WOFF2 fonts
-// are not supported by Vercel's OG Image API yet & the `@fontsource/inter`
-// package we use for the fonts actually loaded on the site does not
-// provide TTF fonts.
+// Local TTF fonts are used because WOFF2 fonts are not supported
+// by the Open Graph image renderer.
 const FONTS = [
-	{ weight: 100, path: './src/assets/fonts/Inter-Thin.ttf' },
-	{ weight: 200, path: './src/assets/fonts/Inter-ExtraLight.ttf' },
-	{ weight: 300, path: './src/assets/fonts/Inter-Light.ttf' },
-	{ weight: 400, path: './src/assets/fonts/Inter-Regular.ttf' },
-	{ weight: 500, path: './src/assets/fonts/Inter-Medium.ttf' },
-	{ weight: 600, path: './src/assets/fonts/Inter-SemiBold.ttf' },
-	{ weight: 700, path: './src/assets/fonts/Inter-Bold.ttf' },
-	{ weight: 800, path: './src/assets/fonts/Inter-ExtraBold.ttf' },
-	{ weight: 900, path: './src/assets/fonts/Inter-Black.ttf' },
+	{
+		name: 'Inter',
+		weight: 100,
+		path: './src/assets/fonts/Inter-Thin.ttf',
+	},
+	{
+		name: 'Inter',
+		weight: 200,
+		path: './src/assets/fonts/Inter-ExtraLight.ttf',
+	},
+	{
+		name: 'Inter',
+		weight: 300,
+		path: './src/assets/fonts/Inter-Light.ttf',
+	},
+	{
+		name: 'Inter',
+		weight: 400,
+		path: './src/assets/fonts/Inter-Regular.ttf',
+	},
+	{
+		name: 'Inter',
+		weight: 500,
+		path: './src/assets/fonts/Inter-Medium.ttf',
+	},
+	{
+		name: 'Inter',
+		weight: 600,
+		path: './src/assets/fonts/Inter-SemiBold.ttf',
+	},
+	{
+		name: 'Inter',
+		weight: 700,
+		path: './src/assets/fonts/Inter-Bold.ttf',
+	},
+	{
+		name: 'Inter',
+		weight: 800,
+		path: './src/assets/fonts/Inter-ExtraBold.ttf',
+	},
+	{
+		name: 'Inter',
+		weight: 900,
+		path: './src/assets/fonts/Inter-Black.ttf',
+	},
+	{
+		name: 'Space Mono',
+		weight: 700,
+		path: './src/assets/fonts/SpaceMono-Bold.ttf',
+	},
 ] as const;
-
-// Note: I adjusted the data here to push buffer to ArrayBuffer, which was recommended as optimized
 
 export const openGraphFonts = FONTS.map(
 	(font): FontOptions => ({
-		name: 'Inter',
-		data: new Uint8Array(readFileSync(path.resolve(process.cwd(), font.path))).buffer,
+		name: font.name,
+		data: new Uint8Array(
+			readFileSync(path.resolve(process.cwd(), font.path)),
+		).buffer,
 		style: 'normal',
 		weight: font.weight,
 	}),
 );
 
-const avatarBuffer = readFileSync(path.resolve(process.cwd(), './src/assets/avatar.jpeg'));
+const avatarBuffer = readFileSync(
+	path.resolve(process.cwd(), './src/assets/avatar.jpeg'),
+);
 
-export const avatarDataUri = `data:image/jpeg;base64,${avatarBuffer.toString('base64')}`;
+export const avatarDataUri =
+	`data:image/jpeg;base64,${avatarBuffer.toString('base64')}`;
+
+const featuredReleaseBuffer = readFileSync(
+	path.resolve(
+		process.cwd(),
+		'./src/assets/releases/sprites-tamaranch-cover.jpg',
+	),
+);
+
+export const featuredReleaseDataUri =
+	`data:image/jpeg;base64,${featuredReleaseBuffer.toString('base64')}`;
