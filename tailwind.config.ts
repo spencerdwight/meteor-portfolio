@@ -24,6 +24,9 @@ export default {
 				meteor: {
 					'0%': {
 						transform: 'rotate(215deg) translateX(0)',
+						opacity: '0',
+					},
+					'10%': {
 						opacity: '1',
 					},
 					'70%': {
