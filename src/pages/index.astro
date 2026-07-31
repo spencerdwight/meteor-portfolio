@@ -8,6 +8,7 @@ import List from '~/components/Widgets/List.astro';
 import Timeline from '~/components/Widgets/Timeline.astro';
 import Document from '~/layouts/Document.astro';
 import SocialLinks from '~/components/SocialLinks.astro';
+import FeaturedRelease from '~/components/FeaturedRelease.astro';
 import { filterPosts, mapPostToListItem, sortPostsByPublishedAt } from '~/utils/content';
 
 const [posts, events, building] = await Promise.all([
@@ -43,6 +44,8 @@ const [posts, events, building] = await Promise.all([
 		<SocialLinks />
 		<Hero />
 </div>
+
+<FeaturedRelease />
 
 		<div class="grid grid-cols-1 md:grid-cols-10 gap-6 z-10">
 			<List

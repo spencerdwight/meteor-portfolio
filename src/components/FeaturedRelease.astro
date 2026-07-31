@@ -1,0 +1,143 @@
+---
+import { Image } from 'astro:assets';
+import { ExternalLink } from 'lucide-astro';
+
+import cover from '~/assets/releases/sprites-tamaranch-cover.jpg';
+---
+
+<section
+	class="relative z-10 rounded-xl border-2 border-gray-100 bg-white px-4 pb-5 dark:border-gray-900 dark:bg-gray-950"
+	id="featured-release"
+>
+	<h3 class="absolute -top-3 left-4 inline-flex rounded-full border-2 border-gray-100 bg-white px-4 text-sm font-bold text-gray-600 dark:border-gray-900 dark:bg-gray-950 dark:text-white">
+		Featured Release
+	</h3>
+
+	<details class="release mx-auto max-w-xl pt-8">
+		<summary
+			aria-label="Reveal links for Armoured Carapace"
+			class="release-toggle cursor-pointer rounded-lg default-focus"
+		>
+			<div class="release-art mx-auto w-full max-w-sm px-10 sm:px-14">
+				<div class="relative aspect-square">
+					<span aria-hidden="true" class="release-vinyl"></span>
+
+					<Image
+						alt="Armoured Carapace cover artwork"
+						class="release-cover absolute inset-0 z-10 h-full w-full rounded-lg object-cover shadow-lg"
+						decoding="async"
+						loading="eager"
+						src={cover}
+					/>
+				</div>
+			</div>
+
+			<div class="mt-5 space-y-1 text-center">
+				<h2 class="text-2xl font-bold text-black dark:text-white">
+					Armoured Carapace
+				</h2>
+
+				<p class="text-sm font-medium text-gray-400 dark:text-gray-500">
+					Fall 2026
+				</p>
+
+				<p class="text-xs text-gray-400 dark:text-gray-600">
+					Select the cover to reveal release links
+				</p>
+			</div>
+		</summary>
+
+		<div class="release-links">
+			<a
+				class="default-focus default-transition inline-flex items-center justify-center gap-2 rounded-md border-2 border-gray-100 bg-white px-4 py-2 text-sm font-bold text-gray-500 hover:border-gray-200 hover:bg-gray-50 hover:text-gray-600 dark:border-gray-900 dark:bg-gray-950 dark:text-gray-300 dark:hover:border-gray-800 dark:hover:bg-gray-900 dark:hover:text-white"
+				href="https://spritesbass.bandcamp.com/album/armoured-carapace"
+				rel="noopener noreferrer"
+				target="_blank"
+			>
+				<span>Bandcamp</span>
+				<ExternalLink aria-hidden="true" class="h-4 w-4" />
+			</a>
+		</div>
+	</details>
+</section>
+
+<style>
+	.release-toggle {
+		list-style: none;
+	}
+
+	.release-toggle::-webkit-details-marker {
+		display: none;
+	}
+
+	.release-cover,
+	.release-vinyl {
+		transition:
+			transform 500ms cubic-bezier(0.22, 1, 0.36, 1),
+			box-shadow 500ms cubic-bezier(0.22, 1, 0.36, 1);
+	}
+
+	.release-vinyl {
+		position: absolute;
+		inset: 4%;
+		border-radius: 9999px;
+		background: repeating-radial-gradient(
+			circle at center,
+			#111 0,
+			#111 3px,
+			#222 4px,
+			#111 6px
+		);
+		box-shadow: 0 12px 30px rgb(0 0 0 / 20%);
+		transform: translateX(0) rotate(0deg);
+	}
+
+	.release-vinyl::after {
+		position: absolute;
+		inset: 38%;
+		border: 3px solid #e5e7eb;
+		border-radius: 9999px;
+		background: #f9fafb;
+		content: '';
+	}
+
+	.release[open] .release-cover {
+		box-shadow: 0 18px 40px rgb(0 0 0 / 25%);
+		transform: translateX(-14%);
+	}
+
+	.release[open] .release-vinyl {
+		transform: translateX(30%) rotate(90deg);
+	}
+
+	.release-links {
+		display: flex;
+		max-height: 0;
+		align-items: center;
+		justify-content: center;
+		margin-top: 0;
+		overflow: hidden;
+		opacity: 0;
+		transform: translateY(-0.5rem);
+		transition:
+			max-height 350ms ease,
+			margin-top 350ms ease,
+			opacity 250ms ease,
+			transform 350ms ease;
+	}
+
+	.release[open] .release-links {
+		max-height: 5rem;
+		margin-top: 1rem;
+		opacity: 1;
+		transform: translateY(0);
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.release-cover,
+		.release-vinyl,
+		.release-links {
+			transition-duration: 0.01ms;
+		}
+	}
+</style>
