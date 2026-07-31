@@ -3,20 +3,31 @@ import Avatar from '~/components/Avatar.astro';
 import { HOME } from '~/constants';
 ---
 
-<section class='sm:flex gap-8 space-y-4 sm:space-y-0 z-10' id='hero'>
-	<div
-		class='max-w-3xl space-y-4 font-semibold not-italic leading-9 tracking-tighter flex-grow'
-	>
-		<h1 class='text-4xl tracking-[0.419em] text-black dark:text-white'>
+<section
+	class="z-10 space-y-4 sm:flex sm:gap-8 sm:space-y-0"
+	id="hero"
+>
+	<div class="max-w-3xl flex-grow space-y-4 pl-2 not-italic leading-9">
+		<h1
+			class="text-3xl font-bold tracking-normal text-black dark:text-white"
+			style="font-family: 'Space Mono', monospace;"
+		>
 			{HOME.title}
 		</h1>
 
-		<h2 class='text-2xl text-gray-400 dark:text-gray-600 md:max-w-md'>
+		<h2
+			class="text-[17px] font-normal tracking-normal text-gray-400 dark:text-gray-600 md:max-w-md"
+			style="font-family: 'Space Mono', monospace;"
+		>
 			{HOME.subtitle}
 		</h2>
 	</div>
 
 	<div class="hidden sm:block">
-		<Avatar className="h-24 w-24 lg:h-32 lg:w-32" width={128} height={128}  />
+		<Avatar
+			className="h-24 w-24 lg:h-32 lg:w-32"
+			height={128}
+			width={128}
+		/>
 	</div>
 </section>

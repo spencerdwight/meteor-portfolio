@@ -10,5 +10,7 @@ export const prerender = true;
 export const GET: APIRoute = (context) => {
 	return new ImageResponse(OGHome({ context }), {
 		fonts: openGraphFonts,
+		height: 627,
+		width: 1200,
 	});
 };

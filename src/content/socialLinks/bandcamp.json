@@ -1,7 +1,7 @@
 {
     "$schema": "../../../.astro/collections/socialLinks.schema.json",
-    "icon": "AtSign",
-    "name": "Twitter",
+    "icon": "Disc3",
+    "name": "Bandcamp",
     "showLabel": false,
-    "url": "https://x.com/spritesbass"
+    "url": "https://spritesbass.bandcamp.com/"
   }

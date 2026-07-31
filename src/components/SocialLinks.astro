@@ -1,0 +1,61 @@
+---
+import { getCollection } from 'astro:content';
+import * as Icons from 'lucide-astro';
+
+import { cn } from '~/utils/cn';
+
+import type { LucideComponent } from '~/types/lucide';
+
+const iconMap = Icons as unknown as Record<string, LucideComponent>;
+
+export interface Props {
+	class?: string;
+}
+
+const { class: className } = Astro.props;
+
+const socialLinkOrder: Record<string, number> = {
+	Products: 0,
+	Instagram: 1,
+	SoundCloud: 2,
+	Bandcamp: 3,
+	Twitter: 4,
+};
+
+const socialLinks = await getCollection('socialLinks').then((links) =>
+	links.sort(
+		(a, b) =>
+			(socialLinkOrder[a.data.name] ?? Number.MAX_SAFE_INTEGER) -
+			(socialLinkOrder[b.data.name] ?? Number.MAX_SAFE_INTEGER),
+	),
+);
+---
+
+<nav
+	aria-label="Social links"
+	class={cn('flex justify-center gap-3', className)}
+>
+	{socialLinks.map(({ data: socialLink }) => {
+		const Icon = iconMap[socialLink.icon]!;
+
+		return (
+			<a
+				aria-label={socialLink.name}
+				class={cn(
+					'inline-flex items-center justify-center rounded-md border-2 border-white bg-white p-3 text-sm text-gray-400 default-transition default-focus hover:border-gray-100 hover:bg-gray-50 hover:text-gray-500 dark:border-gray-900 dark:bg-gray-950 dark:text-gray-400 dark:hover:border-gray-800 dark:hover:bg-gray-900 dark:hover:text-gray-100',
+					{ 'gap-2 px-2 py-1': socialLink.showLabel },
+				)}
+				href={socialLink.url}
+				rel="noopener noreferrer"
+				target="_blank"
+				title={socialLink.name}
+			>
+				<Icon aria-hidden="true" class="h-5 w-5" />
+
+				<span class={socialLink.showLabel ? 'font-bold' : 'sr-only'}>
+					{socialLink.name}
+				</span>
+			</a>
+		);
+	})}
+</nav>

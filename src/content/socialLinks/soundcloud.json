@@ -1,0 +1,7 @@
+{
+    "$schema": "../../../.astro/collections/socialLinks.schema.json",
+    "icon": "AudioWaveform",
+    "name": "SoundCloud",
+    "showLabel": false,
+    "url": "https://soundcloud.com/spritesbass"
+  }
