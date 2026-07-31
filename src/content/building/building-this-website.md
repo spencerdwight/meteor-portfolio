@@ -1,7 +1,7 @@
 ---
 title: Building this Website – Astro + Meteor
 description: "Learning to Code from a ButteryTheme Meteor"
-icon: SprayCan
+icon: Orbit
 publishedAt: 2024-02-22T00:00:00.000Z
 draft: false
 ---
