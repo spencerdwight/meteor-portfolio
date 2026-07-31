@@ -6,10 +6,10 @@ export const SITE_DESCRIPTION =
 	'Electronic Music';
 
 export const HOME = {
-	title: 'Sprites',
+	title: 'SPRITES',
 	subtitle: '_ Electronic music producer *',
 };
 export const HOME_WIDGETS = {
 	catalog: false,
-	building: false,
+	building: true,
 } as const;
