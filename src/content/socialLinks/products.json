@@ -2,5 +2,6 @@
 	"$schema": "../../../.astro/collections/socialLinks.schema.json",
 	"icon": "ShoppingBag",
 	"name": "Products",
+	"showLabel": false,
 	"url": "https://www.rickshawbags.com/collaborations/spencer-dwight"
-}
+  }

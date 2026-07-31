@@ -2,5 +2,6 @@
 	"$schema": "../../../.astro/collections/socialLinks.schema.json",
 	"icon": "Instagram",
 	"name": "Instagram",
-	"url": "https://www.instagram.com/spencerdwight1"
-}
+	"showLabel": false,
+	"url": "https://www.instagram.com/spritesbass/"
+  }
