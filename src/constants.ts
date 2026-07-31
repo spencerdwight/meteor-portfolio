@@ -9,3 +9,7 @@ export const HOME = {
 	title: 'Sprites',
 	subtitle: '_ Electronic music producer *',
 };
+export const HOME_WIDGETS = {
+	catalog: false,
+	building: false,
+} as const;
