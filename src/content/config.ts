@@ -11,6 +11,7 @@ const events = defineCollection({
 			$schema: z.string().optional(),
 			date: z.coerce.date(),
 			icon: z.enum(IconKeys),
+			region: z.string().regex(/^[A-Z]{2}$/),
 			title: z.string(),
 			url: z.string().optional(),
 		})
@@ -57,7 +58,6 @@ const buildingCollection = defineCollection({
 		url: z.string().url().optional(),
 	}),
 });
-
 
 export const collections = {
 	events,

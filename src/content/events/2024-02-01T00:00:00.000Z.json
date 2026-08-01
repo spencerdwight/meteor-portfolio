@@ -2,6 +2,7 @@
 	"$schema": "../../../.astro/collections/events.schema.json",
 	"date": "2025-07-19T00:00:00.000Z",
 	"icon": "Cake",
+	"region": "CA",
 	"title": "Northern Nights",
 	"url": "https://northernnights.org/"
 }
