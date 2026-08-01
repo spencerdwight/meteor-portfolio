@@ -73,7 +73,7 @@ const { class: className, events, id, title } = Astro.props;
 									<p class="font-semibold text-xs line-clamp-1" title={event.title}>{event.title}</p>
 								</div>
 
-								<div class="whitespace-nowrap text-right text-[13px]">
+								<div class="whitespace-nowrap text-right text-[13px] md:text-xs">
 									<time
 										class="font-normal"
 										datetime={event.date.toISOString()}

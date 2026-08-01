@@ -15,6 +15,7 @@ const meteors = Array.from({ length: number }, (_, index) => ({
 	animationDelay: `-${(random(index + 201) * 8).toFixed(2)}s`,
 	animationDuration: `${(5 + random(index + 301) * 5).toFixed(2)}s`,
 	hideOnMobile: index >= 16,
+	isRgb: index % 12 === 5,
 	left: `${Math.round(random(index + 101) * 110)}%`,
 	top: `${Math.round(random(index + 1) * 100)}%`,
 }));
@@ -27,11 +28,30 @@ const meteors = Array.from({ length: number }, (_, index) => ({
 	{meteors.map((meteor) => (
 		<span
 			class:list={[
-				'absolute h-0.5 w-0.5 animate-meteor-effect rounded-full bg-gray-100 opacity-0 shadow-[0_0_0_1px_#ffffff10] will-change-transform dark:bg-gray-600',
-				'before:absolute before:top-1/2 before:h-0.5 before:w-[3.46875rem] before:-translate-y-1/2 before:rounded-full before:bg-gradient-to-r before:from-gray-300 before:to-transparent before:content-[""] dark:before:from-gray-600',
+				'absolute h-0.5 w-0.5 animate-meteor-effect rounded-full opacity-0 shadow-[0_0_0_1px_#ffffff10] will-change-transform',
+				'before:absolute before:top-1/2 before:h-0.5 before:w-[3.46875rem] before:-translate-y-1/2 before:rounded-full before:content-[""]',
+				meteor.isRgb
+					? 'meteor-rgb'
+					: 'bg-gray-100 before:bg-gradient-to-r before:from-gray-300 before:to-transparent dark:bg-gray-600 dark:before:from-gray-600',
 				meteor.hideOnMobile && 'hidden sm:block',
 			]}
 			style={`top: ${meteor.top}; left: ${meteor.left}; animation-delay: ${meteor.animationDelay}; animation-duration: ${meteor.animationDuration};`}
 		/>
 	))}
 </div>
+
+<style>
+	.meteor-rgb {
+		background-color: #60a5fa;
+	}
+
+	.meteor-rgb::before {
+		background-image: linear-gradient(
+			to right,
+			#ef4444 0%,
+			#22c55e 38%,
+			#3b82f6 72%,
+			transparent 100%
+		);
+	}
+</style>
