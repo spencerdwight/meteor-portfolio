@@ -10,7 +10,7 @@ export const formatLongDate = (date: Date): string => {
 export const formatShortDate = (date: Date): string => {
 	const month = String(date.getUTCMonth() + 1).padStart(2, '0');
 	const day = String(date.getUTCDate()).padStart(2, '0');
-	const year = date.getUTCFullYear();
+	const year = String(date.getUTCFullYear()).slice(-2);
 
 	return `${month}-${day}-${year}`;
 };

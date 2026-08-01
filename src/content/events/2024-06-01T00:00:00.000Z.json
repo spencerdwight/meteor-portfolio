@@ -2,6 +2,7 @@
 	"$schema": "../../../.astro/collections/events.schema.json",
 	"date": "2025-04-06T00:00:00.000Z",
 	"icon": "Puzzle",
+	"region": "WA",
 	"title": "Black Tiger Sex Machine",
 	"url": "https://www.tacomadome.org/events/detail/btsm-2025"
 }
